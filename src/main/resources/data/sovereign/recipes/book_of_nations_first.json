@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"LLL",
+		"PSP",
+		"LLL"
+	],
+	"key": {
+		"L": {
+			"item": "minecraft:leather"
+		},
+		"P": {
+			"item": "minecraft:paper"
+		},
+		"S": {
+			"item": "minecraft:wooden_sword"
+		}
+	},
+	"result": {
+		"item": "sovereign:book_of_nations_volume_i",
+		"count": 1
+	}
+}

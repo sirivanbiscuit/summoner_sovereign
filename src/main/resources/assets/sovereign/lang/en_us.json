@@ -1,0 +1,14 @@
+{
+	"item.sovereign.book_of_nations_volume_i": "Book Of Nations, Volume I",
+	"item.sovereign.book_of_nations_volume_ii": "Book Of Nations, Volume II",
+	"item.sovereign.the_left_opposition": "Ideology Dossier",
+	"item.sovereign.the_right_opposition": "Ideology Dossier",
+	
+	"itemGroup.sovereign_tab": "Sovereignty",
+	
+	"entity.sovereign.temple_cornerstone": "Temple Cornerstone",
+	"entity.sovereign.city_cornerstone": "City Cornerstone",
+	
+	"key.category.sovereignmod.sovereign": "Sovereign",
+	"key.sovereignmod.drink_water": "Drink Water"
+}

@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "net.ivandev.sovereign.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"client": [
+    	"ExampleMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"refmap": "sovereign.mixin-refmap.json"
+}

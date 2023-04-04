@@ -1,0 +1,12 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "sovereign:book_of_nations_volume_i"
+		}
+	],
+	"result": {
+		"item": "sovereign:book_of_nations_volume_ii",
+		"count": 1
+	}
+}
