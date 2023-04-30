@@ -1,4 +1,4 @@
-package net.ivandev.sovereign.emp.raid;
+package net.ivandev.sovereign.empiremech.raid;
 
 import net.minecraft.core.Vec3i;
 import net.minecraft.server.level.ServerLevel;
@@ -14,7 +14,10 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
-public abstract class RaidMonsterConfig {
+public final class RaidMonsterConfig {
+
+	private RaidMonsterConfig() {
+	}
 
 	private static final ItemStack[][] EQUIPMENT_POOL = {
 			{ Items.IRON_HELMET.getDefaultInstance(), Items.CHAINMAIL_HELMET.getDefaultInstance() },

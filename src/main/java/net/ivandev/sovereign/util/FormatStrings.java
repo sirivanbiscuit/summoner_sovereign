@@ -3,7 +3,10 @@ package net.ivandev.sovereign.util;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.TextComponent;
 
-public class FormatStrings {
+public final class FormatStrings {
+
+	private FormatStrings() {
+	}
 
 	public static final String BLACK = "\u00A70";
 	public static final String DARK_BLUE = "\u00A71";

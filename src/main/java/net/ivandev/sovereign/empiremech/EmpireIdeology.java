@@ -1,10 +1,10 @@
-package net.ivandev.sovereign.emp;
+package net.ivandev.sovereign.empiremech;
 
 public enum EmpireIdeology {
 
-	ANARCHIST(0, "Anarchist", "Commune of "), // Anarchism
-	COMMUNIST(1, "Communist", "Peoples Republic of "), // Communism
-	DEMOCRATIC(2, "Democratic", "Dominion of "), // Democracy
+	ANARCHIST(0, "Anarchist", "Free Territory of "), // Anarchism
+	COMMUNIST(1, "Communist", "Commune of "), // Communism
+	DEMOCRATIC(2, "Democratic", "Republic of "), // Democracy
 	MONARCHIST(3, "Monarchist", "Kingdom of "), // Monarchism
 	FASCIST(4, "Fascist", "Unitary State of "); // Fascism
 

@@ -1,4 +1,4 @@
-package net.ivandev.sovereign.emp;
+package net.ivandev.sovereign.empiremech;
 
 import java.util.ArrayList;
 import java.util.UUID;

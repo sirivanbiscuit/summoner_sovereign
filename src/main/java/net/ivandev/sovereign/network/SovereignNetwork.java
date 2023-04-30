@@ -1,41 +1,36 @@
 package net.ivandev.sovereign.network;
 
 import net.ivandev.sovereign.SovereignMod;
-import net.ivandev.sovereign.network.packet.ExampleC2SPacket;
+import net.ivandev.sovereign.network.packet.ExampleS2CPacket;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
-public class SovereignNetwork {
+public final class SovereignNetwork {
 
-	private static SimpleChannel INSTANCE;
+	private SovereignNetwork() {
+	}
+
+	private static final String PROTOCOL_VERSION = "1.0";
+
+	private static final SimpleChannel INSTANCE = NetworkRegistry.ChannelBuilder
+			.named(new ResourceLocation(SovereignMod.MOD_ID, "network")) //
+			.networkProtocolVersion(() -> PROTOCOL_VERSION) //
+			.clientAcceptedVersions(PROTOCOL_VERSION::equals) //
+			.serverAcceptedVersions(PROTOCOL_VERSION::equals) //
+			.simpleChannel();
 
 	private static int packetId = 0;
 
-	private static int id() {
-		// bumps it up 1 while returning
-		return packetId++;
+	public static void registerNetwork() {
+		INSTANCE.registerMessage(packetId++, //
+				ExampleS2CPacket.class, //
+				ExampleS2CPacket::encode, //
+				ExampleS2CPacket::decode, //
+				ExampleS2CPacket::handle);
 	}
 
-	public static void register() {
-		SimpleChannel net = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(SovereignMod.MOD_ID, "network"))
-				.networkProtocolVersion(() -> "1.0").clientAcceptedVersions(s -> true).serverAcceptedVersions(s -> true)
-				.simpleChannel();
-
-		INSTANCE = net;
-
-		net.messageBuilder(ExampleC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER).decoder(ExampleC2SPacket::new)
-				.encoder(ExampleC2SPacket::toBytes).consumer(ExampleC2SPacket::handle).add();
-	}
-
-	public static <SMG> void sendToServer(SMG message) {
-		INSTANCE.sendToServer(message);
-	}
-
-	public static <SMG> void sendToPlayer(SMG message, ServerPlayer player) {
-		INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
+	public static SimpleChannel getNetwork() {
+		return INSTANCE;
 	}
 }

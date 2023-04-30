@@ -12,11 +12,11 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class CityCornerstoneEntity extends Cornerstone implements IAnimatable {
+public class FarmCornerstone extends Cornerstone implements IAnimatable {
 
 	private final AnimationFactory factory = new AnimationFactory(this);
 
-	public CityCornerstoneEntity(EntityType<? extends Cornerstone> pEntityType, Level pLevel) {
+	public FarmCornerstone(EntityType<? extends Cornerstone> pEntityType, Level pLevel) {
 		super(pEntityType, pLevel);
 	}
 	
@@ -27,7 +27,7 @@ public class CityCornerstoneEntity extends Cornerstone implements IAnimatable {
 	@Override
 	public void registerControllers(AnimationData data) {
 		data.addAnimationController(
-				new AnimationController<CityCornerstoneEntity>(this, "controller", 0, this::predicate));
+				new AnimationController<FarmCornerstone>(this, "controller", 0, this::predicate));
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class CityCornerstoneEntity extends Cornerstone implements IAnimatable {
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.city_cornerstone.idle", true));
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.farm_cornerstone.idle", true));
 		return PlayState.CONTINUE;
 	}
 

@@ -1,6 +1,7 @@
 package net.ivandev.sovereign;
 
-import net.ivandev.sovereign.entitydata.render.entity.CityCornerstoneRenderer;
+import net.ivandev.sovereign.entitydata.render.entity.CapitalCornerstoneRenderer;
+import net.ivandev.sovereign.entitydata.render.entity.FarmCornerstoneRenderer;
 import net.ivandev.sovereign.entitydata.render.entity.TempleCornerstoneRenderer;
 import net.ivandev.sovereign.gui.BookOfNationsOneGui;
 import net.ivandev.sovereign.gui.BookOfNationsTwoGui;
@@ -47,10 +48,13 @@ public class SovereignMod {
 		MenuScreens.register(SovereignMenuTypes.THE_RIGHT_OPPOSITION.get(), TheRightOppositionGui::new);
 
 		EntityRenderers.register(SovereignEntityTypes.TEMPLE_CORNERSTONE.get(), TempleCornerstoneRenderer::new);
-		EntityRenderers.register(SovereignEntityTypes.CITY_CORNERSTONE.get(), CityCornerstoneRenderer::new);
+		EntityRenderers.register(SovereignEntityTypes.CAPITAL_CORNERSTONE.get(), CapitalCornerstoneRenderer::new);
+		EntityRenderers.register(SovereignEntityTypes.FARM_CORNERSTONE.get(), FarmCornerstoneRenderer::new);
 	}
 
 	private void commonSetup(final FMLCommonSetupEvent event) {
-		SovereignNetwork.register();
+		event.enqueueWork(() -> {
+			SovereignNetwork.registerNetwork();
+		});
 	}
 }

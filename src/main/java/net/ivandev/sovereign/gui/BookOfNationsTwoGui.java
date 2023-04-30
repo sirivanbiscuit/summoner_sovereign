@@ -6,7 +6,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.ivandev.sovereign.SovereignMod;
-import net.ivandev.sovereign.emp.Empire;
+import net.ivandev.sovereign.empiremech.Empire;
 import net.ivandev.sovereign.menu.ItemMenu;
 import net.ivandev.sovereign.savedata.EmpireDataManager;
 import net.ivandev.sovereign.util.FormatStrings;

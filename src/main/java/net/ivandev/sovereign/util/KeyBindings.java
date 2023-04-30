@@ -7,7 +7,10 @@ import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraftforge.client.settings.KeyConflictContext;
 
-public class KeyBindings {
+public final class KeyBindings {
+	
+	private KeyBindings() {
+	}
 	
 	public static final String KEY_CATEGORY_SOVEREIGN = "key.category.sovereignmod.sovereign";
 	public static final String KEY_DRINK_WATER = "key.sovereignmod.drink_water";

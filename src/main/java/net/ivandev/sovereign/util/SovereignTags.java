@@ -7,7 +7,10 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
-public class SovereignTags {
+public final class SovereignTags {
+
+	private SovereignTags() {
+	}
 
 	public static final TagKey<Block> EMPTY = block("empty");
 	public static final TagKey<Block> FLUID = block("fluid");

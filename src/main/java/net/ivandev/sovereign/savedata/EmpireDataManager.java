@@ -3,7 +3,7 @@ package net.ivandev.sovereign.savedata;
 import java.util.ArrayList;
 
 import net.ivandev.sovereign.SovereignMod;
-import net.ivandev.sovereign.emp.Empire;
+import net.ivandev.sovereign.empiremech.Empire;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;

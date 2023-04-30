@@ -1,9 +1,9 @@
 package net.ivandev.sovereign.event;
 
 import net.ivandev.sovereign.SovereignMod;
-import net.ivandev.sovereign.capability.CornerstoneProvider;
-import net.ivandev.sovereign.capability.HostileProvider;
-import net.ivandev.sovereign.emp.raid.RaidMonsterConfig;
+import net.ivandev.sovereign.capability.types.CornerstoneCapability;
+import net.ivandev.sovereign.capability.types.HostileCapability;
+import net.ivandev.sovereign.empiremech.raid.RaidMonsterConfig;
 import net.ivandev.sovereign.entity.cornerstone.Cornerstone;
 import net.ivandev.sovereign.savedata.ChunkDataManager;
 import net.ivandev.sovereign.util.SovereignTags;
@@ -28,11 +28,20 @@ import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+/**
+ * Procedures in this event bus:
+ * <ul>
+ * <li>Entity Capability Attachments</li>
+ * <li>Capability Register Event</li>
+ * <li>Bucket Disabling</li>
+ * <li>Monster armouring</li>
+ * <li>Chunk Drying</li>
+ * </ul>
+ */
 @Mod.EventBusSubscriber(modid = SovereignMod.MOD_ID)
 public class SovereignEvents {
 
@@ -40,32 +49,30 @@ public class SovereignEvents {
 	public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
 		Entity entity = event.getObject();
 		if (entity instanceof Cornerstone) {
-			if (!event.getObject().getCapability(CornerstoneProvider.LEVEL).isPresent()) {
-				event.addCapability(new ResourceLocation(SovereignMod.MOD_ID, "properties"), new CornerstoneProvider());
+			if (!event.getObject().getCapability(CornerstoneCapability.DATA).isPresent()) {
+				event.addCapability(new ResourceLocation(SovereignMod.MOD_ID, "properties"),
+						new CornerstoneCapability());
 			}
 		}
 		if (entity instanceof Monster) {
-			if (!event.getObject().getCapability(HostileProvider.DATA).isPresent()) {
-				event.addCapability(new ResourceLocation(SovereignMod.MOD_ID, "properties"), new HostileProvider());
+			if (!event.getObject().getCapability(HostileCapability.DATA).isPresent()) {
+				event.addCapability(new ResourceLocation(SovereignMod.MOD_ID, "properties"), new HostileCapability());
 			}
 		}
 	}
 
-	@SubscribeEvent
-	public static void onPlayerCloned(PlayerEvent.Clone event) {
-		if (event.isWasDeath()) {
-			event.getOriginal().getCapability(CornerstoneProvider.LEVEL).ifPresent(oldStore -> {
-				event.getPlayer().getCapability(CornerstoneProvider.LEVEL).ifPresent(newStore -> {
-					newStore.copy(oldStore);
-				});
-			});
-		}
-	}
+	/*
+	 * @SubscribeEvent public static void onPlayerCloned(PlayerEvent.Clone event) {
+	 * if (event.isWasDeath()) {
+	 * event.getOriginal().getCapability(null).ifPresent(oldStore -> {
+	 * event.getPlayer().getCapability(null).ifPresent(newStore -> { //
+	 * newStore.copy(oldStore); }); }); } }
+	 */
 
 	@SubscribeEvent
 	public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
-		event.register(CornerstoneProvider.Level.class);
-		event.register(HostileProvider.HostileData.class);
+		event.register(CornerstoneCapability.class);
+		event.register(HostileCapability.class);
 	}
 
 	@SubscribeEvent
@@ -95,7 +102,7 @@ public class SovereignEvents {
 		 * more dangerous/challenging.
 		 */
 		if (!event.getWorld().isClientSide() && (entity instanceof Zombie || entity instanceof AbstractSkeleton)) {
-			entity.getCapability(HostileProvider.DATA).ifPresent(data -> {
+			entity.getCapability(HostileCapability.DATA).ifPresent(data -> {
 				if (!data.created) {
 					data.created = true;
 					RaidMonsterConfig.raidSoldierEquip((Monster) entity);
@@ -103,7 +110,7 @@ public class SovereignEvents {
 			});
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void onEntityNaturalSpawn(LivingSpawnEvent.CheckSpawn event) {
 		Entity e = event.getEntity();
@@ -133,4 +140,5 @@ public class SovereignEvents {
 			}
 		}
 	}
+
 }

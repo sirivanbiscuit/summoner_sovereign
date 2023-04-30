@@ -1,8 +1,9 @@
 package net.ivandev.sovereign.event;
 
 import net.ivandev.sovereign.SovereignMod;
-import net.ivandev.sovereign.entity.cornerstone.CityCornerstoneEntity;
-import net.ivandev.sovereign.entity.cornerstone.TempleCornerstoneEntity;
+import net.ivandev.sovereign.entity.cornerstone.CapitalCornerstone;
+import net.ivandev.sovereign.entity.cornerstone.FarmCornerstone;
+import net.ivandev.sovereign.entity.cornerstone.TempleCornerstone;
 import net.ivandev.sovereign.init.SovereignEntityTypes;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -13,7 +14,8 @@ public class EventBusEvents {
 
 	@SubscribeEvent
 	public static void entityAttributeEvent(EntityAttributeCreationEvent event) {
-		event.put(SovereignEntityTypes.TEMPLE_CORNERSTONE.get(), TempleCornerstoneEntity.setAttributes());
-		event.put(SovereignEntityTypes.CITY_CORNERSTONE.get(), CityCornerstoneEntity.setAttributes());
+		event.put(SovereignEntityTypes.TEMPLE_CORNERSTONE.get(), TempleCornerstone.setAttributes());
+		event.put(SovereignEntityTypes.CAPITAL_CORNERSTONE.get(), CapitalCornerstone.setAttributes());
+		event.put(SovereignEntityTypes.FARM_CORNERSTONE.get(), FarmCornerstone.setAttributes());
 	}
 }

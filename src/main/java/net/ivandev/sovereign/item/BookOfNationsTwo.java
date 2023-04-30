@@ -1,17 +1,14 @@
 package net.ivandev.sovereign.item;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import net.ivandev.sovereign.emp.Empire;
 import net.ivandev.sovereign.init.SovereignMenuTypes;
 import net.ivandev.sovereign.menu.ItemMenu;
-import net.ivandev.sovereign.savedata.EmpireDataManager;
 import net.ivandev.sovereign.tab.SovereignTab;
 import net.ivandev.sovereign.util.FormatStrings;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -26,43 +23,45 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
 
-public class TheLeftOppositionItem extends Item {
+public class BookOfNationsTwo extends Item {
 
-	public TheLeftOppositionItem(Properties pProperties) {
+	public BookOfNationsTwo(Properties pProperties) {
 		super(pProperties.tab(SovereignTab.SOVEREIGN_TAB));
 	}
 
 	@Override
 	public void appendHoverText(ItemStack pStack, Level pLevel, List<Component> pTooltipComponents,
 			TooltipFlag pIsAdvanced) {
-		pTooltipComponents.add(new TextComponent(FormatStrings.GRAY + "The Left Opposition"));
+		if (Screen.hasShiftDown()) {
+			pTooltipComponents.add(new TextComponent(FormatStrings.GRAY + "Identity and Security"));
+			pTooltipComponents.add(new TextComponent(""));
+			pTooltipComponents.add(new TextComponent(FormatStrings.GRAY + "- Border Settings"));
+			pTooltipComponents.add(new TextComponent(FormatStrings.GRAY + "- Name Settings"));
+			pTooltipComponents.add(new TextComponent(FormatStrings.GRAY + "- Empire Deletion"));
+		} else {
+			pTooltipComponents.add(new TextComponent(FormatStrings.GRAY + "Identity and Security"));
+			pTooltipComponents.add(new TextComponent(FormatStrings.GRAY + "Hold SHIFT for more information"));
+		}
 		super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
 	}
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
 		if (!pLevel.isClientSide()) {
-			int pId = Empire.getPlayerEmpireId(pPlayer, (ServerLevel) pLevel);
-			ArrayList<Empire> empires = EmpireDataManager.get((ServerLevel) pLevel);
-			if (pId >= 0 && !empires.isEmpty()) {
-				if (!empires.get(pId).ideology.name.equals("Anarchist")) {
-					// open gui if ideology is rank -1 -> +2
-					NetworkHooks.openGui((ServerPlayer) pPlayer, new MenuProvider() {
+			NetworkHooks.openGui((ServerPlayer) pPlayer, new MenuProvider() {
 
-						@Override
-						public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory,
-								Player pPlayer) {
-							return new ItemMenu(SovereignMenuTypes.THE_LEFT_OPPOSITION.get(), pContainerId);
-						}
-
-						@Override
-						public Component getDisplayName() {
-							return new TextComponent("TheLeftOppositionGui");
-						}
-					});
+				@Override
+				public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
+					return new ItemMenu(SovereignMenuTypes.BOOK_OF_NATIONS_VOLUME_II.get(), pContainerId);
 				}
-			}
+
+				@Override
+				public Component getDisplayName() {
+					return new TextComponent("BookOfNationsTwoGui");
+				}
+			});
 		}
 		return new InteractionResultHolder<ItemStack>(InteractionResult.SUCCESS, pPlayer.getItemInHand(pUsedHand));
 	}
+
 }

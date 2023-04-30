@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.ivandev.sovereign.SovereignMod;
+import net.ivandev.sovereign.empiremech.Empire;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -15,7 +16,8 @@ public class ChunkDataManager extends SavedData {
 
 	public static class Entry {
 
-		private boolean genDry;
+		private boolean genDry = false;
+		private String owner = null;
 
 		public Entry setGenDry(boolean set) {
 			this.genDry = set;
@@ -26,14 +28,24 @@ public class ChunkDataManager extends SavedData {
 			return this.genDry;
 		}
 
+		public void setOwner(Empire empire) {
+			this.owner = empire.name;
+		}
+
+		public String getOwner() {
+			return this.owner;
+		}
+
 		private CompoundTag saveEntry() {
 			CompoundTag nbt = new CompoundTag();
 			nbt.putBoolean("genDry", this.genDry);
+			nbt.putString("owner", this.owner);
 			return nbt;
 		}
 
 		private Entry loadEntry(CompoundTag nbt) {
 			this.genDry = nbt.getBoolean("genDry");
+			this.owner = nbt.getString("owner");
 			return this;
 		}
 	}

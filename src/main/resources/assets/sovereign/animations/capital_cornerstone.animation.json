@@ -1,17 +1,21 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.temple_cornerstone.idle": {
+		"animation.capital_cornerstone.idle": {
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
 				"crystal": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
 					"position": {
 						"0.0": {
 							"vector": [0, 0, 0]
 						},
 						"2.0": {
-							"vector": [0, 8, 0],
+							"vector": [0, 4, 0],
 							"easing": "easeInOutSine"
 						},
 						"4.0": {
@@ -21,38 +25,34 @@
 					}
 				},
 				"core": {
+					"relative_to": {
+						"rotation": "entity"
+					},
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
 						},
 						"4.0": {
-							"vector": [360, 0, 360]
+							"vector": [0, 360, 0],
+							"easing": "linear"
 						}
 					}
 				},
 				"shell1": {
+					"relative_to": {
+						"rotation": "entity"
+					},
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
 						},
 						"4.0": {
-							"vector": [0, 360, 360]
-						}
-					}
-				},
-				"shell2": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"4.0": {
-							"vector": [360, 0, 0],
-							"easing": "linear"
+							"vector": [0, 720, 0],
+							"easing": "easeInOutCirc"
 						}
 					}
 				}
 			}
 		}
-	},
-	"geckolib_format_version": 2
+	}
 }

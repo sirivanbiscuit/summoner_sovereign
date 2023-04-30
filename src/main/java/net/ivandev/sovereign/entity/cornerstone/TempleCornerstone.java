@@ -12,11 +12,11 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class TempleCornerstoneEntity extends Cornerstone implements IAnimatable {
+public class TempleCornerstone extends Cornerstone implements IAnimatable {
 
 	private final AnimationFactory factory = new AnimationFactory(this);
 
-	public TempleCornerstoneEntity(EntityType<? extends Cornerstone> pEntityType, Level pLevel) {
+	public TempleCornerstone(EntityType<? extends Cornerstone> pEntityType, Level pLevel) {
 		super(pEntityType, pLevel);
 	}
 	
@@ -27,7 +27,7 @@ public class TempleCornerstoneEntity extends Cornerstone implements IAnimatable 
 	@Override
 	public void registerControllers(AnimationData data) {
 		data.addAnimationController(
-				new AnimationController<TempleCornerstoneEntity>(this, "controller", 0, this::predicate));
+				new AnimationController<TempleCornerstone>(this, "controller", 0, this::predicate));
 	}
 
 	@Override
